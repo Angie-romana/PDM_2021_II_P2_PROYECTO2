@@ -9,47 +9,101 @@
 
     <TextView
         android:id="@+id/AHORCADO"
-        android:layout_width="216dp"
-        android:layout_height="67dp"
+        android:layout_width="227dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="318dp"
         android:fontFamily="@font/annie_use_your_telescope"
         android:text="AHORCADO"
         android:textAllCaps="false"
+        android:textColor="@color/design_default_color_error"
         android:textSize="48sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="38dp" />
+        app:layout_constraintBottom_toTopOf="@+id/txvPalabra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRecargar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnValidar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="118dp"
         android:text="Validar"
-        tools:layout_editor_absoluteX="195dp"
-        tools:layout_editor_absoluteY="518dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtIngresarLetra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtIngresarLetra" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtIngresarLetra"
         android:layout_width="64dp"
-        android:layout_height="51dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="172dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="A"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="515dp" />
+        android:maxLength="1"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnValidar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvPalabra" />
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="219dp"
-        android:layout_height="274dp"
+        android:layout_width="272dp"
+        android:layout_height="314dp"
+        android:layout_marginBottom="176dp"
         android:background="@drawable/prueba2"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="139dp" />
+        app:layout_constraintBottom_toTopOf="@+id/txvPista"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRecargar" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="161dp"
-        android:layout_height="27dp"
-        android:text="AQUI VA LA  PALABRA"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="439dp" />
+        android:id="@+id/txvPalabra"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="49dp"
+        android:text="PALABRA"
+        android:textAlignment="center"
+        android:textColor="#514F4F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtIngresarLetra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AHORCADO" />
+
+    <TextView
+        android:id="@+id/txvPista"
+        android:layout_width="283dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="127dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/btnRecargar"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/recargar"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/AHORCADO"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
