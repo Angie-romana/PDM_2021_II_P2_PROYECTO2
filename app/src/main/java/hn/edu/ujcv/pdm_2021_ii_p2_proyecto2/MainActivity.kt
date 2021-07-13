@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun datos() {
 
-       palabra.put(numero++,"Bangtan| Mi grupo favorito :)")
-        palabra.put(numero++,"Jeon Jungkook| la pista es que es jungkook lol")
-        palabra.put(numero++,"Musica|Es lo que se pone para bailar")
+       palabra.put(numero++,"BANGTANÜ| Mi grupo favorito :)")
+        palabra.put(numero++,"JEON JUNGKOOK| la pista es que es jungkook lol")
+        palabra.put(numero++,"MÚSICA|Es lo que se pone para bailar")
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("palabras",palabra)
 

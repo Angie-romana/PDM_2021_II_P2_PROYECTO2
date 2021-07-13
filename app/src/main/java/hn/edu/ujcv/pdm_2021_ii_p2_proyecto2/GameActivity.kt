@@ -8,11 +8,12 @@ import java.util.*
 
 class GameActivity : AppCompatActivity() {
     var palabra:HashMap<Int,String> = hashMapOf()
-    var numero=0
-    var intentos=0
-    var palabraAdivinarGuiones=""
+    var intentos=6
     var contarPalabra=0
     var palabraAdivinar=""
+    var datosGuiones = ArrayList<String>()
+    var datosLetras = ArrayList<String>()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +21,8 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
         incializar()
         btnValidar.setOnClickListener { validar() }
-        presentarPalabra()
-        btnRecargar.setOnClickListener { presentarPalabra() }
+        presentarPalabraEnGuiones()
+        btnRecargar.setOnClickListener { presentarPalabraEnGuiones() }
 
     }
 
@@ -34,50 +35,55 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun validar() {
-        if (intentos==6){
+        if (intentos==1){
             btnValidar.isEnabled=false
         }
         var guiones =""
-
-
+        var contarincidencias=0
         for (i in 0..contarPalabra-1){
-            var letra=palabraAdivinar.get(i).toString()
-            if (txtIngresarLetra.text.toString().equals(letra)){
-                var letraTxt= txtIngresarLetra.text.toString()
 
-             // guiones=guiones+txtIngresarLetra.text.toString()
-                //palabraAdivinarGuiones = palabraAdivinarGuiones + letraTxt
+            var letra=datosLetras.get(i)
+            var guionLetra=datosGuiones.get(i)
+            var letraIngresada=txtIngresarLetra.text.toString().toUpperCase()
 
-
-            }else {
-                guiones=guiones+"-"
-                  // palabraAdivinarGuiones = palabraAdivinarGuiones + "-"
-               // intentos=intentos-1
-              //  Toast.makeText(this,"La letra es ERRONEA solo le quedan $intentos intentos",Toast.LENGTH_LONG).show()
+            if(letra.equals(letraIngresada)){
+                datosGuiones.removeAt(i)
+                datosGuiones.add(i,letraIngresada)
+                contarincidencias++
 
             }
-
-
+            guiones=guiones+datosGuiones.get(i)
         }
+        if (contarincidencias==0){
+            intentos=intentos-1
+            Toast.makeText(this, "Esta incorrecta la letra tiene [$intentos] intentos", Toast.LENGTH_SHORT).show()
+        }
+
+
+        txtIngresarLetra.setText("")
         txvPalabra.setText(guiones)
 
 
     }
 
 
-    fun presentarPalabra(){
+    fun presentarPalabraEnGuiones(){
         var palabraJuego:String
         var pista:String
         var numeroRandom= (1..3).random()
         var guiones=""
+        var letrasSeparadas=""
+        datosGuiones = ArrayList<String>()
+        datosLetras = ArrayList<String>()
 
-      //  txvPalabra.setText(numeroRandom.toString())
+
 
 
        for (palabras in palabra){
             var lista= palabras.toString().split("|","=")
             palabraJuego=lista[1]
             pista=lista[2]
+
            var datosDelHash=palabra.get(numeroRandom)
 
 
@@ -88,14 +94,20 @@ class GameActivity : AppCompatActivity() {
 
             for(i in 0..contarPalabra-1){
                 var letra=palabraJuego.get(i).toString()
+                datosLetras.add(i,letra)
+                datosGuiones.add(i,"-")
 
               if(letra.equals(" ")){
-                    guiones=guiones+" "
-                }else {
-                    guiones = guiones + "-"
-                }
-            }
+                  datosGuiones.add(i," ")
 
+                }
+
+            }
+                   for(i in 0..contarPalabra-1){
+                      guiones=guiones+datosGuiones.get(i)
+                       letrasSeparadas=letrasSeparadas+datosLetras.get(i)
+
+                   }
                    txvPalabra.setText(guiones)
                    txvPista.setText("PISTA: "+pista)
                }
