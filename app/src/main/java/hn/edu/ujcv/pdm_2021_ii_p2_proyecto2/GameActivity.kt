@@ -1,5 +1,6 @@
 package hn.edu.ujcv.pdm_2021_ii_p2_proyecto2
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -7,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 import android.media.MediaPlayer
-import android.view.View
+import androidx.appcompat.app.AlertDialog
 
 
 class GameActivity : AppCompatActivity() {
@@ -22,12 +23,13 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         incializar()
         btnValidar.setOnClickListener { validar() }
         presentarPalabraEnGuiones()
-        btnRecargar.setOnClickListener { regresarMenu() }
+        btnRecargar.setOnClickListener { recargar() }
         if (mMediaPlayer == null) {
             mMediaPlayer = MediaPlayer.create(this, R.raw.musica1)
             mMediaPlayer!!.isLooping = true
@@ -50,19 +52,76 @@ class GameActivity : AppCompatActivity() {
     private fun regresarMenu() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        mMediaPlayer!!.release()
     }
 
+    private fun volverAJugar(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¿Desea volver a jugar?")
+        builder.setMessage("¿Está seguro que desea volver al menú principal?")
+        builder.setPositiveButton("Jugar de nuevo",{ dialogInterface: DialogInterface, i: Int ->
+            recargar()
+        })
+        builder.setNegativeButton("Regresar al menu",{ dialogInterface: DialogInterface, i: Int ->
+            regresarMenu()
+        })
+        builder.show()
+    }
 
+    private fun ganaste(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Ganaste!")
+        builder.setMessage("¿Está seguro que desea volver al menú principal?")
+        builder.setPositiveButton("Jugar de nuevo",{ dialogInterface: DialogInterface, i: Int ->
+            recargar()
+        })
+        builder.setNegativeButton("Regresar al menu",{ dialogInterface: DialogInterface, i: Int ->
+            regresarMenu()
+        })
+        builder.show()
+    }
+
+    private fun recargar(){
+        intentos=6
+        btnValidar.isEnabled=true
+        presentarPalabraEnGuiones()
+        cambiarImagen(intentos)
+    }
 
     private fun incializar() {
         var intent = intent
         palabra = intent.getSerializableExtra("palabras") as HashMap<Int, String>
 
+    }
+
+    private fun cambiarImagen(intento:Int){
+        when (intento) {
+            6 -> {
+                fondogame.setBackgroundResource(R.drawable.fondo)
+                txvImagenAhorcado.setBackgroundResource(R.drawable.intento0)
+            }
+            5 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento1)
+            4 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento2)
+            3 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento3)
+            2 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento4)
+            1 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento5)
+            0 -> {
+                fondogame.setBackgroundResource(R.drawable.fondo2)
+                txvImagenAhorcado.setBackgroundResource(R.drawable.intento6)
+                volverAJugar()
+            }
+        }
 
     }
 
 
     private fun validar() {
+
+        if(txtIngresarLetra.text.isEmpty()){
+            txtIngresarLetra.error = "No puede dejar en blanco"
+            return
+        }
+
         if (intentos==1){
             btnValidar.isEnabled=false
         }
@@ -87,13 +146,17 @@ class GameActivity : AppCompatActivity() {
         }
         if (contarincidencias==0){
             intentos=intentos-1
-            Toast.makeText(this, "Esta incorrecta la letra tiene [$intentos] intentos", Toast.LENGTH_SHORT).show()
+            cambiarImagen(intentos)
+            Toast.makeText(this, "Esta incorrecta la letra tiene $intentos intentos", Toast.LENGTH_SHORT).show()
         }
 
 
         txtIngresarLetra.setText("")
         txvPalabra.setText(guiones)
 
+        if(txvPalabra.text.toString().equals(palabraAdivinar)){
+            ganaste()
+        }
 
     }
 
