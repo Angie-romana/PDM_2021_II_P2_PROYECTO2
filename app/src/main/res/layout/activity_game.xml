@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/AHORCADO"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="378dp"
@@ -25,43 +25,49 @@
         app:layout_constraintStart_toEndOf="@+id/btnRecargar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnValidar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
-        android:text="Validar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/txtIngresarLetra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtIngresarLetra" />
-
     <EditText
         android:id="@+id/txtIngresarLetra"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="61dp"
+        android:layout_height="53dp"
         android:layout_marginStart="131dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="168dp"
         android:capitalize="characters"
         android:digits="abcdefghijklmnñopqrstuvxwyzABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚáéíóúüÜ"
         android:ems="10"
+        android:fontFamily="@font/annie_use_your_telescope"
         android:hint="A"
         android:inputType="textPersonName"
         android:maxLength="1"
         android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnValidar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvPalabra" />
 
+    <Button
+        android:id="@+id/btnValidar"
+        android:layout_width="97dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="116dp"
+        android:backgroundTint="@color/purple_200"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:text="Validar"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtIngresarLetra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtIngresarLetra" />
+
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="269dp"
-        android:layout_height="328dp"
+        android:layout_width="266dp"
+        android:layout_height="340dp"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="65dp"
         android:layout_marginBottom="211dp"
-        android:background="@drawable/intento6"
+        android:background="@drawable/intento1"
         app:layout_constraintBottom_toTopOf="@+id/txvPista"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -70,25 +76,26 @@
 
     <TextView
         android:id="@+id/txvPalabra"
-        android:layout_width="356dp"
-        android:layout_height="45dp"
+        android:layout_width="353dp"
+        android:layout_height="54dp"
         android:layout_marginBottom="13dp"
+        android:fontFamily="@font/annie_use_your_telescope"
         android:text="PALABRA"
         android:textAlignment="center"
         android:textColor="#514F4F"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtIngresarLetra"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AHORCADO" />
 
     <TextView
         android:id="@+id/txvPista"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="48dp"
+        android:layout_width="301dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="58dp"
         android:text="TextView"
         android:textAlignment="center"
@@ -100,13 +107,14 @@
 
     <Button
         android:id="@+id/btnRecargar"
-        android:layout_width="45dp"
-        android:layout_height="43dp"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
         android:layout_marginStart="42dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="37dp"
         android:background="@drawable/recargar"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toStartOf="@+id/AHORCADO"
         app:layout_constraintStart_toStartOf="parent"

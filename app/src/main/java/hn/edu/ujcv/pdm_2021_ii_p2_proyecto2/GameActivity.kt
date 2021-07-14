@@ -1,10 +1,14 @@
 package hn.edu.ujcv.pdm_2021_ii_p2_proyecto2
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
+import android.media.MediaPlayer
+import android.view.View
+
 
 class GameActivity : AppCompatActivity() {
     var palabra:HashMap<Int,String> = hashMapOf()
@@ -14,17 +18,41 @@ class GameActivity : AppCompatActivity() {
     var datosGuiones = ArrayList<String>()
     var datosLetras = ArrayList<String>()
 
-
+    var mMediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         incializar()
         btnValidar.setOnClickListener { validar() }
         presentarPalabraEnGuiones()
-        btnRecargar.setOnClickListener { presentarPalabraEnGuiones() }
+        btnRecargar.setOnClickListener { regresarMenu() }
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.musica1)
+            mMediaPlayer!!.isLooping = true
+            mMediaPlayer!!.start()
+       /* } else{ mMediaPlayer!!.start()
+
+    }*/}
+
+
 
     }
+    override fun onStop() {
+        super.onStop()
+        if (mMediaPlayer != null) {
+            mMediaPlayer!!.release()
+            mMediaPlayer = null
+        }
+    }
+
+    private fun regresarMenu() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
     private fun incializar() {
         var intent = intent
@@ -50,6 +78,9 @@ class GameActivity : AppCompatActivity() {
                 datosGuiones.removeAt(i)
                 datosGuiones.add(i,letraIngresada)
                 contarincidencias++
+                mMediaPlayer = MediaPlayer.create(this, R.raw.efecto1)
+                mMediaPlayer!!.start()
+
 
             }
             guiones=guiones+datosGuiones.get(i)
