@@ -18,7 +18,6 @@ class GameActivity : AppCompatActivity() {
     var palabraAdivinar=""
     var datosGuiones = ArrayList<String>()
     var datosLetras = ArrayList<String>()
-
     var mMediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +40,8 @@ class GameActivity : AppCompatActivity() {
 
 
     }
+
+
     override fun onStop() {
         super.onStop()
         if (mMediaPlayer != null) {
@@ -52,7 +53,9 @@ class GameActivity : AppCompatActivity() {
     private fun regresarMenu() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        mMediaPlayer!!.release()
+        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidodokidoki)
+        mMediaPlayer!!.isLooping = true
+        mMediaPlayer!!.start()
     }
 
     private fun volverAJugar(){
@@ -164,7 +167,7 @@ class GameActivity : AppCompatActivity() {
     fun presentarPalabraEnGuiones(){
         var palabraJuego:String
         var pista:String
-        var numeroRandom= (1..3).random()
+        var numeroRandom= (1..(palabra.size+1)).random()
         var guiones=""
         var letrasSeparadas=""
         datosGuiones = ArrayList<String>()
