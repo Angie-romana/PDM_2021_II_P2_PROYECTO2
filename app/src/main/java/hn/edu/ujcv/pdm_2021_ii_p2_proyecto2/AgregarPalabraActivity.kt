@@ -31,7 +31,7 @@ class AgregarPalabraActivity : AppCompatActivity() {
     private fun inicializar(){
         var intent = intent
         palabra = intent.getSerializableExtra("palabra") as HashMap<Int, String>
-        numero = palabra.size + 1
+        numero = palabra.size
     }
     private fun inicializarCreacion() {
         btnAgregar.isEnabled = true

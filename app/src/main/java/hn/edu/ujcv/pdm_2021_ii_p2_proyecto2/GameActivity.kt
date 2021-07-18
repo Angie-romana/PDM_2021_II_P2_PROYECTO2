@@ -94,7 +94,6 @@ class GameActivity : AppCompatActivity() {
     private fun incializar() {
         var intent = intent
         palabra = intent.getSerializableExtra("palabras") as HashMap<Int, String>
-
     }
 
     private fun cambiarImagen(intento:Int){
@@ -167,7 +166,7 @@ class GameActivity : AppCompatActivity() {
     fun presentarPalabraEnGuiones(){
         var palabraJuego:String
         var pista:String
-        var numeroRandom= (1..(palabra.size+1)).random()
+        var numeroRandom= (1..(palabra.size)).random()
         var guiones=""
         var letrasSeparadas=""
         datosGuiones = ArrayList<String>()
