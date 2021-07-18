@@ -11,6 +11,7 @@ class AgregarPalabraActivity : AppCompatActivity() {
     var palabra: HashMap<Int, String> = hashMapOf()
     var numero = 0
     var palabrasNuevas = false;
+    var mMediaPlayer2: MediaPlayer? = null
     var mMediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +22,32 @@ class AgregarPalabraActivity : AppCompatActivity() {
         btnAgregar.setOnClickListener { crearPalabra() }
         //btnEnviar.setOnClickListener { enviarDatos() }
         btnRegresar.setOnClickListener { regresar() }
-        if (mMediaPlayer == null) {
-            mMediaPlayer = MediaPlayer.create(this, R.raw.sonidodokidoki)
-            mMediaPlayer!!.isLooping = true
-            mMediaPlayer!!.start()
+        playSound(this)
+
+
+    }
+    fun playSound(view: AgregarPalabraActivity) {
+        if (mMediaPlayer2 == null) {
+            mMediaPlayer2 = MediaPlayer.create(this, R.raw.musicapalabra)
+            // mMediaPlayer2!!.isLooping = true
+            mMediaPlayer2!!.start()
+        } else mMediaPlayer2!!.start()
+    }
+    fun pauseSound(view: AgregarPalabraActivity) {
+        if (mMediaPlayer2 != null && mMediaPlayer2!!.isPlaying) mMediaPlayer2!!.pause()
+    }
+    fun stopSound(view: AgregarPalabraActivity) {
+        if (mMediaPlayer2 != null) {
+            mMediaPlayer2!!.stop()
+            mMediaPlayer2!!.release()
+            mMediaPlayer2 = null
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        if (mMediaPlayer2 != null) {
+            mMediaPlayer2!!.release()
+            mMediaPlayer2 = null
         }
     }
 
@@ -38,6 +61,8 @@ class AgregarPalabraActivity : AppCompatActivity() {
     }
 
     private fun crearPalabra() {
+        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer!!.start()
         val dato = StringBuilder()
         if (!datosVacios()) {
             return
@@ -72,6 +97,11 @@ class AgregarPalabraActivity : AppCompatActivity() {
         return true
     }
     private fun regresar() {
+        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer!!.start()
+        pauseSound(this)
+        stopSound(this)
+        onStop()
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("palabrasnuevas",palabra)
             intent.putExtra("hayPalabraNueva",palabrasNuevas)

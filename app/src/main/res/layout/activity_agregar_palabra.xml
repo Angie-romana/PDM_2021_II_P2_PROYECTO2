@@ -4,64 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo2"
+    android:background="@drawable/fondo4"
     tools:context=".AgregarPalabraActivity">
 
     <Button
         android:id="@+id/btnAgregar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="284dp"
+        android:layout_width="140dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="260dp"
         android:text="Agregar "
-        android:textColor="#151313"
+        android:textColor="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPalabra" />
 
     <EditText
         android:id="@+id/txtPalabra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="151dp"
         android:ems="10"
+        android:fontFamily="@font/annie_use_your_telescope"
         android:hint="Escribe la palabra"
         android:inputType="textPersonName"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnRegresar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Regresar al menu"
-        android:textColor="#151313"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        android:layout_width="73dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="109dp"
+        android:background="@drawable/casa"
+        android:backgroundTint="@color/purple_200"
+        android:textColor="@color/teal_700"
+        app:layout_constraintBottom_toTopOf="@+id/txtPalabra"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtPista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="406dp"
         android:ems="10"
+        android:fontFamily="@font/annie_use_your_telescope"
         android:hint="Escribe la pista"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/txtPalabra"
-        app:layout_constraintTop_toBottomOf="@+id/txtPalabra" />
-
-    <Button
-        android:id="@+id/btnEnviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="77dp"
-        android:text="enviar"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegresar"
-        app:layout_constraintStart_toStartOf="@+id/btnRegresar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPalabra" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

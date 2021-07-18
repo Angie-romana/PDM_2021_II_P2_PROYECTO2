@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     var palabra: HashMap<Int,String> = hashMapOf()
     var numero=1
     var mMediaPlayer: MediaPlayer? = null
+    var mMediaPlayer2: MediaPlayer? = null
     var palabrasNuevas = false;
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -51,12 +52,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun datos() {
+        mMediaPlayer2 = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer2!!.start()
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("palabras",palabra)
         startActivity(intent)
     }
 
     private fun irCrear() {
+        mMediaPlayer2 = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer2!!.start()
         val intent = Intent(this,AgregarPalabraActivity::class.java)
         intent.putExtra("palabra", palabra)
         startActivity(intent)

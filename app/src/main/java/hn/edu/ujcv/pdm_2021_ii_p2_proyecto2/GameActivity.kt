@@ -19,6 +19,8 @@ class GameActivity : AppCompatActivity() {
     var datosGuiones = ArrayList<String>()
     var datosLetras = ArrayList<String>()
     var mMediaPlayer: MediaPlayer? = null
+    var mMediaPlayer2: MediaPlayer? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -28,34 +30,46 @@ class GameActivity : AppCompatActivity() {
         incializar()
         btnValidar.setOnClickListener { validar() }
         presentarPalabraEnGuiones()
-        btnRecargar.setOnClickListener { recargar() }
-        if (mMediaPlayer == null) {
-            mMediaPlayer = MediaPlayer.create(this, R.raw.musica1)
-            mMediaPlayer!!.isLooping = true
-            mMediaPlayer!!.start()
-       /* } else{ mMediaPlayer!!.start()
-
-    }*/}
-
-
+        btnRecargar.setOnClickListener { recargar2() }
+        playSound(this)
+        //onStop()
 
     }
 
 
+
+    fun playSound(view: GameActivity) {
+        if (mMediaPlayer2 == null) {
+            mMediaPlayer2 = MediaPlayer.create(this, R.raw.musica1)
+            // mMediaPlayer2!!.isLooping = true
+            mMediaPlayer2!!.start()
+        } else mMediaPlayer2!!.start()
+    }
+    fun pauseSound(view: GameActivity) {
+        if (mMediaPlayer2 != null && mMediaPlayer2!!.isPlaying) mMediaPlayer2!!.pause()
+    }
+    fun stopSound(view: GameActivity) {
+        if (mMediaPlayer2 != null) {
+            mMediaPlayer2!!.stop()
+            mMediaPlayer2!!.release()
+            mMediaPlayer2 = null
+        }
+    }
     override fun onStop() {
         super.onStop()
-        if (mMediaPlayer != null) {
-            mMediaPlayer!!.release()
-            mMediaPlayer = null
+        if (mMediaPlayer2 != null) {
+            mMediaPlayer2!!.release()
+            mMediaPlayer2 = null
         }
     }
 
     private fun regresarMenu() {
+        pauseSound(this)
+        stopSound(this)
+        onStop()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidodokidoki)
-        mMediaPlayer!!.isLooping = true
-        mMediaPlayer!!.start()
+
     }
 
     private fun volverAJugar(){
@@ -85,6 +99,17 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun recargar(){
+        pauseSound(this)
+        stopSound(this)
+        playSound(this)
+        intentos=6
+        btnValidar.isEnabled=true
+        presentarPalabraEnGuiones()
+        cambiarImagen(intentos)
+    }
+    private fun recargar2(){
+        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer!!.start()
         intentos=6
         btnValidar.isEnabled=true
         presentarPalabraEnGuiones()
@@ -108,8 +133,13 @@ class GameActivity : AppCompatActivity() {
             2 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento4)
             1 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento5)
             0 -> {
+                pauseSound(this)
+                stopSound(this)
+                onStop()
                 fondogame.setBackgroundResource(R.drawable.fondo2)
                 txvImagenAhorcado.setBackgroundResource(R.drawable.intento6)
+                mMediaPlayer2 = MediaPlayer.create(this, R.raw.musica2)
+                mMediaPlayer2!!.start()
                 volverAJugar()
             }
         }
@@ -118,6 +148,8 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun validar() {
+        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer!!.start()
 
         if(txtIngresarLetra.text.isEmpty()){
             txtIngresarLetra.error = "No puede dejar en blanco"
