@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         }catch (e:Exception){
 
         }
-        palabra.put(numero++,"BANGTANÜ| Mi grupo favorito :)")
-        palabra.put(numero++,"JEON JUNGKOOK| la pista es que es jungkook lol")
-        palabra.put(numero++,"MÚSICA|Es lo que se pone para bailar")
+        palabra.put(numero++,"MICHAEL JACKSON|Cantante Estado Unidense, que múrio a sus 50 años")
+        palabra.put(numero++,"MCDONALDS|Restaurante de comida rapida con 2 arcos amarillos")
+        palabra.put(numero++,"MANGA|Lo dibuja el japonés, lo hace el ladrón y la tienes por duplicado en tu camisa y pantalón")
     }
 
 

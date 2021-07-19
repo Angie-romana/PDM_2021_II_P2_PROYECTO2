@@ -29,7 +29,7 @@ class AgregarPalabraActivity : AppCompatActivity() {
     fun playSound(view: AgregarPalabraActivity) {
         if (mMediaPlayer2 == null) {
             mMediaPlayer2 = MediaPlayer.create(this, R.raw.musicapalabra)
-            // mMediaPlayer2!!.isLooping = true
+             mMediaPlayer2!!.isLooping = true
             mMediaPlayer2!!.start()
         } else mMediaPlayer2!!.start()
     }

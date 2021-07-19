@@ -18,8 +18,12 @@ class GameActivity : AppCompatActivity() {
     var palabraAdivinar=""
     var datosGuiones = ArrayList<String>()
     var datosLetras = ArrayList<String>()
+
     var mMediaPlayer: MediaPlayer? = null
     var mMediaPlayer2: MediaPlayer? = null
+    var mMediaPlayer3: MediaPlayer? = null
+    var mMediaPlayer4: MediaPlayer? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +45,7 @@ class GameActivity : AppCompatActivity() {
     fun playSound(view: GameActivity) {
         if (mMediaPlayer2 == null) {
             mMediaPlayer2 = MediaPlayer.create(this, R.raw.musica1)
-            // mMediaPlayer2!!.isLooping = true
+             mMediaPlayer2!!.isLooping = true
             mMediaPlayer2!!.start()
         } else mMediaPlayer2!!.start()
     }
@@ -66,7 +70,7 @@ class GameActivity : AppCompatActivity() {
     private fun regresarMenu() {
         pauseSound(this)
         stopSound(this)
-        onStop()
+
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
 
@@ -86,6 +90,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun ganaste(){
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Ganaste!")
         builder.setMessage("¿Está seguro que desea volver al menú principal?")
@@ -104,14 +109,16 @@ class GameActivity : AppCompatActivity() {
         playSound(this)
         intentos=6
         btnValidar.isEnabled=true
+        txtIngresarLetra.isEnabled=true
         presentarPalabraEnGuiones()
         cambiarImagen(intentos)
     }
     private fun recargar2(){
-        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
-        mMediaPlayer!!.start()
+        mMediaPlayer3 = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer3!!.start()
         intentos=6
         btnValidar.isEnabled=true
+        txtIngresarLetra.isEnabled=true
         presentarPalabraEnGuiones()
         cambiarImagen(intentos)
     }
@@ -133,9 +140,8 @@ class GameActivity : AppCompatActivity() {
             2 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento4)
             1 -> txvImagenAhorcado.setBackgroundResource(R.drawable.intento5)
             0 -> {
-                pauseSound(this)
+               // pauseSound(this)
                 stopSound(this)
-                onStop()
                 fondogame.setBackgroundResource(R.drawable.fondo2)
                 txvImagenAhorcado.setBackgroundResource(R.drawable.intento6)
                 mMediaPlayer2 = MediaPlayer.create(this, R.raw.musica2)
@@ -148,8 +154,8 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun validar() {
-        mMediaPlayer = MediaPlayer.create(this, R.raw.sonidoboton)
-        mMediaPlayer!!.start()
+        mMediaPlayer3 = MediaPlayer.create(this, R.raw.sonidoboton)
+        mMediaPlayer3!!.start()
 
         if(txtIngresarLetra.text.isEmpty()){
             txtIngresarLetra.error = "No puede dejar en blanco"
@@ -158,6 +164,7 @@ class GameActivity : AppCompatActivity() {
 
         if (intentos==1){
             btnValidar.isEnabled=false
+            txtIngresarLetra.isEnabled=false
         }
         var guiones =""
         var contarincidencias=0
@@ -189,6 +196,8 @@ class GameActivity : AppCompatActivity() {
         txvPalabra.setText(guiones)
 
         if(txvPalabra.text.toString().equals(palabraAdivinar)){
+            mMediaPlayer4 = MediaPlayer.create(this, R.raw.ganaste)
+            mMediaPlayer4!!.start()
             ganaste()
         }
 
